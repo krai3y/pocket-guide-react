@@ -9,7 +9,7 @@ import { places } from '../../data/places';
 const PlacesOfRoute: FC = () => {
 
   const {link} = useParams();
-  const routeWithLink = routes.filter(route => route.link === link)[0];
+  const routeWithLink = routes.find(route => route.link === link);
 
   if (!routeWithLink) {  
     return <Navigate to="/404" />;
