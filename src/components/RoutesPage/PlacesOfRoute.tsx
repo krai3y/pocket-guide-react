@@ -12,7 +12,7 @@ const PlacesOfRoute: FC = () => {
   const routeWithLink = routes.find(route => route.link === link);
 
   if (!routeWithLink) {  
-    return <Navigate to="/404" />;
+    return <Navigate to="/404" replace/>;
   }
 
   const filterForRoute = places.filter(place => place.route === routeWithLink.id);

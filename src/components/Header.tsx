@@ -24,9 +24,9 @@ const Header: FC = () => {
                 <li className="nav-item"> 
                   <NavLink to="/places" className="nav-link color-blue">Места</NavLink>
                 </li> 
-                <li className="nav-item">
-                  <NavLink to={`/routes/${link}/places`} className="nav-link color-blue">{link ? `Места «${routeWithLink.name}»` : null}</NavLink>
-                </li> 
+                {link && <li className="nav-item">
+                  <NavLink to={`/routes/${link}/places`} className="nav-link color-blue">{`Места «${routeWithLink.name}»`}</NavLink>
+                </li>}
               </ul>
             </div>
           </div>

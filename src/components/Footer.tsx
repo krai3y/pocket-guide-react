@@ -5,8 +5,9 @@ import { routes } from '../data/routes';
 const Footer: FC = () => {
   const {link} = useParams();
   const routeWithLink = routes.filter(route => route.link === link)[0];
+  
   return (
-    <footer className="shadow-footer mt-5"> 
+    <footer className={`shadow-footer ${!routeWithLink && "mt-5"}`}> 
       <nav className="navbar navbar-expand-lg pt-4"> 
         <div className="container d-flex justify-content-center justify-content-sm-start"> 
           <NavLink to="/" className="navbar-brand"> 

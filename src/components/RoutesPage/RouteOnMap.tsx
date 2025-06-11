@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { YMaps, Map, GeoObject, Placemark, ZoomControl } from '@pbe/react-yandex-maps';
+import { YMaps, Map, GeoObject, Placemark, ZoomControl, Button } from '@pbe/react-yandex-maps';
 import { places } from '../../data/places';
 import { routes } from '../../data/routes';
 
@@ -9,8 +9,12 @@ const RouteOnMap: FC = () => {
   const routeWithLink = routes.find(route => route.link === link);
 
   if (!routeWithLink) {  
-    return <Navigate to="/404" />;  
+    return <Navigate to="/404" replace/>;
   }
+
+  const handleClick = () => {
+    window.location.href = routeWithLink.src;
+  };
 
   const filterForRoute = places.filter(place => place.route === routeWithLink.id);
   const coordinates = filterForRoute.map(coord => {
@@ -18,6 +22,8 @@ const RouteOnMap: FC = () => {
       [coord.coordX, coord.coordY]
     );
   });
+  console.log(coordinates);
+  
 
   return (
     <YMaps query={{apikey: 'a52c9117-0c92-4019-824e-df6145a1426e'}}>
@@ -27,8 +33,14 @@ const RouteOnMap: FC = () => {
           zoom: 15,
         }}
         width="100%"
-        height="85vh"
+        height="87vh"
       >
+        <Button
+          options={{ maxWidth: 180 }}
+          data={{ content: "Перейти к маршруту" }}
+          defaultState={{ selected: false }}
+          onClick={handleClick}
+        />
         <GeoObject
           geometry={{
             type: "LineString",
